@@ -542,8 +542,8 @@ to clear the screen:
 ====================
 
 oracle -- cl scr
-mysql -- clear or  ctrl+L
-trainingDB2 -- !cls
+mysql -- clear or  ctrl+L(ubuntu or linux) or windows (\!cls)
+IBMDB2 -- !cls
 
 
 Alter:
@@ -1262,23 +1262,6 @@ alter table customer drop primary key;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  RELATIONAL OPERATORS:
  =====================
   > -- GREATER THAN
@@ -1445,11 +1428,6 @@ SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
   ====
 
   SELECT DEPTNO,JOB,SUM(SAL),count(*) FROM EMP GROUP BY DEPTNO,JOB;
-
-
-
-
-
   
   3)Having clause:
   ================
@@ -1467,3 +1445,331 @@ SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
 
    select Dept,sum(sal) from emp group by deptno having sum(sal)>8750  order by deptno
 
+
+ JOINS:
+  ======
+   Join are used to retrieve the records from multiple tables .
+
+   join are used to create temporary a relation between the tables
+   based on common column.
+
+   if suppose we have n -tables ,then the atleast the possible
+   join conditions are n-1.
+
+   join are performed based on a common column datatype.
+
+
+  There are two types of joins
+
+ 
+  Equi-joins
+ ----------
+ inner join or simple join or equi join
+  
+ outer join--left [outer] join,right [outer] join,full[outer]join.
+ self join 
+  Non-Equi-joins
+  cross join
+ 
+
+
+ equi-joins:
+ ============
+
+  this joins performed based on equal operator (=).
+
+
+ inner join:
+ ============
+
+  this join return or fetch all records based on condition matched.
+
+ syntax:
+ =======
+ 
+ select * [specific columns] from table1 join table2
+  on (table1.commoncolumname=table2.commoncolumnname).
+
+ 
+  EX:
+  ===
+
+  write a inner join query to get empno,ename,sal,deptno from emp and
+ deptno,dname from dept using alias name.
+
+ sol:
+ ====
+ ANSI Syntax:
+------------
+  select e.deptno,e.empno,e.ename,e.sal,d.deptno,d.dname from 
+  dept d join emp e  on (d.deptno=e.deptno);
+
+  o/p:- 14 records using dept,emp table
+
+
+ or
+
+  select e.deptno,e.empno,e.ename,e.sal,d.deptno,d.dname from emp e,dept d where e.deptno=d.deptno;
+
+
+
+
+
+
+
+ EX:2:
+ =====
+
+ write a inner or equijoin query to get empno,ename,sal from emp and
+ deptno,dname from dept using alias name and display where deptno 20
+
+
+ sol:
+------
+ select e.empno,e.ename,e.sal,d.deptno,d.dname from 
+ dept d join emp e  on (d.deptno=e.deptno) where d.deptno=20
+
+  or
+
+ select e.empno,e.ename,e.sal,d.deptno,d.dname from emp e,dept d where e.deptno=d.deptno and d.deptno=20;
+
+o/p= 5 records.
+
+
+
+
+
+
+ OUTER JOIN:
+ ===========
+
+ LEFT OUTER JOIN:
+ ================
+
+ THIS JOINS RETRIVES OR FETCH ALL THE MATCHED RECORDS FROM BOTH TABLES
+ AND NON-MATCHED  RECORDS FROM LEFT HAND SIDE TABLE IN JOIN.
+ 
+ SYNTAX:
+ ========
+
+ SELECT * [SPECIFIC COLUMNS] FROM TABLE1 LEFT [OUTER] JOIN TABLE2
+ ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+ NOTE:
+ =====
+
+ TABLE1 IS A LEFT TABLE.
+
+
+ EX:
+ ====
+ WRITE A QUERY TO GET EMPNO,ENAME,SAL FROM EMP
+ AND DEPTNO,DNAME FROM DEPT AND DISPLAY MATCHED REOCRDS FROM TWO TABLES
+ AND NON MATCHED RECORDS FROM DEPT TABLE.
+
+SOL:
+===
+	SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D LEFT OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO)
+	
+
+     O/P:- 14 MATCHED REOCRDS FROM DEPT,EMP TABLE  AND 2
+          NON-MATCHED RECORD FROM DEPT TABLE.
+
+
+
+
+ RIGHT OUTER JOIN:
+ =================
+
+ THIS JOIN RETRIVES OR FETCH ALL THE MATCHED RECORDS FROM BOTH THE
+ TABLES AND NON- MATCHED RECORDS FROM RIGHT HAND SIDE TABLE IN JOIN.
+
+ SYNTAX:
+ ========
+
+ SELECT * [SPECIFIC COLUMNS] FROM TABLE1 RIGHT [OUTER] JOIN TABLE2
+ ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+ NOTE:
+ =====
+
+ TABLE2 IS RIGHT TABLE.
+
+ EX:
+===
+
+ WRITE A QUERY TO DISPLLAY EMPNO,ENAME,SAL FROM EMP
+ AND DEPTNO,DNAME FROM DEPT , display MATCHED RECORDS FROM
+ BOTH THE TABLES AND NON MATCHED RECORDS FROM EMP TABLE 
+ USING RIGHT OUTER JOIN.
+
+
+SOL:
+====
+  SELECT E.empno,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM
+  DEPT D RIGHT OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+
+
+
+
+
+ FULL OUTER JOIN:
+ ================
+ THIS JOIN RETRIVES OR FETCH ALL THE MATCHED AND NON-MATCHED
+ RECORDS FROM THE BOTH THE TABLE.
+
+SYNTAX:
+========
+
+SELECT * [SPECIFIC COLUMNS] FROM TABLE1 FULL [OUTER] JOIN TABLE2
+ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+EX:
+====
+
+WRITE  A QUERY TO DISPLAY ALL THE RCORDS FROM BOTH TABLES
+USING FULL OUTER JOIN.
+
+EX:
+====
+ SELECT E.Empno,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM
+ DEPT D full OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+  O/P:17 RECORDS.
+
+
+
+OR
+===
+      SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D ,EMP E WHERE D.DEPTNO=E.DEPTNO(+)        
+        UNION 
+        SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D ,EMP E WHERE D.DEPTNO(+)=E.DEPTNO;
+
+
+EX:
+===
+
+WRITE A EQUI JOIN QUERY TO GET DEPTNO,EMPNO,ENAME,SAL FROM EMP
+DEPTNO,DNAME FROM DEPT
+DEPTNO,HISAL FROM SALGRADE JOIN THREE TABLES.
+
+SOL:
+====
+
+SELECT E.DEPTNO,E.ENAME,E.EMPNO,E.SAL,D.DEPTNO,D.DNAME,
+S.DEPTNO,S.HISAL FROM 
+DEPT D JOIN EMP E ON(D.DEPTNO=E.DEPTNO) JOIN SALGRADE S
+ON (D.DEPTNO=S.DEPTNO);
+
+O/P- 22 ROWS:
+
+
+
+
+
+ SELF JOIN:
+ ==========
+
+ A SELF JOIN is  a join of a table itself.
+
+ note:
+ =====
+
+ two table alias name we need to specify in from clause
+ of same table.
+
+
+ ex:
+ ===
+
+ write a self join query to display empolyee name along
+ with his manager names using emp table.
+
+ sol:
+ ====
+ select e.ename,m.ename as manager from emp e,emp m
+ where e.mgr=m.empno;
+
+
+
+
+
+ CROSS JOIN:
+ ===========
+ 
+ THIS PERFORMS CARTIESAN PRODUCT
+
+ EX:
+ ===
+
+ WRITE A QUERY TO PERFORM CROSS JOIN USING DEPT,EMP
+
+ DEPT--5
+ EMP --15
+
+ CROSS JOIN:- 5*15=75 RECORDS.
+
+ SOL:
+ ====
+ SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME FROM 
+ DEPT D CROSS JOIN EMP E;
+
+ or 
+    
+SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME FROM
+    DEPT D,EMP E;
+
+
+ NATURAL JOIN:
+ =============
+ NATURAL JOIN IS SIMILAR TO INNER JOIN,
+ BUT THE CONDITION IS PERFORMED IMPLICITY BASED ON COLUMN NAME.
+
+ EX:
+ ===   
+
+ SELECT E.ENAME,D.DNAME FROM
+ DEPT D NATURAL JOIN EMP E;
+
+ NOTE:
+ ===== 
+
+ IN NATURAL JOIN THE COMMON COLUMN NAME BETWEEN  THE TWO TABLE
+ MUST BE SAME. IF NOT IT WILL PERFORM CROSS JOIN
+
+ NATURAL JOIN IS DEPENDENT ON COLUMN NAME .
+
+
+
+
+NON-EQUI JOIN:
+==============
+=,!= OTHER THAN THIS OPERATORS(between,in,...)
+
+
+SALGRADE Table
+------------------
+CREATE TABLE SALGRADE (GRADE int,LOSAL int,HISAL int); 
+
+INSERT INTO SALGRADE VALUES (1,  700, 1200); 
+INSERT INTO SALGRADE VALUES (2, 1201, 1400); 
+INSERT INTO SALGRADE VALUES (3, 1401, 2000); 
+INSERT INTO SALGRADE VALUES (4, 2001, 3000); 
+INSERT INTO SALGRADE VALUES (5, 3001, 9999);
+
+
+1)WRITE A NON-EQUI JOIN QUERY 
+TO GET EMPNO,ENAME,SAL FROM EMP
+GRADE FROM SAL GRADE
+AND DISPLAY SALARIES BASED ON E.SAL COLUMN BETWEEN
+THE RANGE OF LOSAL AND HISAL COLUMNS OF SALGRADE TABLE.
+
+SOL:
+=====
+
+SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
+FROM EMP E,SALGRADE S WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;
