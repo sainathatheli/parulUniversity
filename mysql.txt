@@ -1,0 +1,1469 @@
+What is a Database?
+
+A Data Base is an Organized Collection of Data which can be easily
+accessed, managed and updated.
+In today’s World, Data plays a vital role in every business. In our day to day life, we see or
+interact with many applications and Software’s, every application that we see or work with will
+have two parts:
+
+1. GUI (Graphical User Interface / Front end)
+2. Database
+
+To keep it simple GUI is the part where user interacts with (like Facebook applications – look
+and feel) and the Data that we see in the application (like Facebook profile, messages, images
+and videos) are pulled from Database.
+
+
+End User who interacts with the application may not know how the data is being fetched and
+where so much of information is stored. Internally all the dynamic content that we see in the
+application is fetched from Database.
+
+Database and all its components should be designed and configured at the time of application
+development. Once the application is developed we will not be able to make changes to the
+database structure as every change will hugely affect the business application GUI code.
+It is very important to make sure that data is securely maintained and accurately stored. 
+
+So to maintain security and accuracy in database a set of rules / software system is defined and that
+we call it as DBMS (Data Base Management System – which performs all the operations on the
+database)
+
+What is DBMS?
+
+DBMS (Database Management System) is a software tool that is used to store and manage data
+in the Database.
+
+A database management system contains a set of programs that control the creation,
+maintenance, and use of a database. Like:
+
+Adding new data to the table.
+Modifying existing data.
+Deleting unwanted data.
+
+DBMS allows different user application programs to concurrently access the same database.
+Before Database and DBMS were introduced, traditional approach was to store data in flat files
+(physical files in system) but there were some disadvantages with it.
+
+What is RDBMS?
+A relational database management system (RDBMS) is a Database Management System
+(DBMS) that is based on the relational model introduced by E. F. Codd and most popular 
+databases currently in use are based on the relational database model. To put in different 
+words RDBMS is built on top of in which data is stored in tables and the relationships among 
+the data are maintained. The data stored in a table is organized into rows and columns. Each 
+row in a table represents an individual record and each column represents a field. A record is 
+an individual entry in the database.
+
+Difference between DBMS and RDBMS
+----------------------------------
+For example, consider the database which stores employee information. 
+In DBMS, all details like empno, ename, job, salary, deptno, dname, location, street, city, state, phone will 
+be stored in a single table. 
+
+But in RDBMS, the data model will be designed in such a way that 
+like the empno, ename, job, salary and deptno will be stored in emp table and deptno, dname, location will be stored in dept table and location, street, city, state, phone will be stored under locations table. 
+
+Any information to be obtained is done by properly relating the ‘emp’, ‘dept’ 
+and ‘locations’ tables.
+
+
+
+
+SQL:
+====
+SQL stands for Structured Query Language. 
+
+It is used for storing and managing data in relational database management system (RDMS).
+
+It is a standard language for Relational Database System. It enables a user to create, 
+read, update and delete relational databases and tables.
+
+All the RDBMS like MySQL, Informix, Oracle, MS Access and SQL Server use SQL as their
+standard database language.
+SQL allows users to query the database in a number of ways, using English-like statements.
+
+Rules:
+SQL follows the following rules:
+
+Structure query language is not case sensitive. 
+Generally, keywords of SQL are written in uppercase.
+Statements of SQL are dependent on text lines. 
+We can use a single SQL statement on one or multiple text line.
+Using the SQL statements, you can perform most of the actions in a database.
+
+  sql stands for structure query language designed for
+accessing and managing the data in the RDBMS
+
+Sql act as interface between user and database.
+
+why sql ?
+=========
+
+Sql can retrieve records from the database.
+
+sql can insert record into the database
+
+sql can update record in to a database
+
+sql can provides privileges to pprocedures,functions,
+views, sequences----database objects
+
+
+Sql is divided into five categories:
+====================================
+
+DDl --DATA  DEFINITION LANGUAGE     
+-------------------------------
+CMDS:CREATE,ALTER,TRUNCATE,DROP,RENAME
+
+which deals with database schemas and descriptions, of how the data should reside in the database.
+                            
+DML -- DATA MANIPULATION LANGUAGE
+-----------------------------------
+
+CMDS:INSERT,UPDATE,DELETE
+
+which deals with data manipulation and includes most common SQL statements such 
+INSERT, UPDATE, DELETE, etc., and it is used to store, modify, retrieve, delete and update data in a database.
+
+DCL -- DATA CONTROL LANGUAGE
+-----------------------------
+GRANT,REVOKE
+
+TCL -- TRANSACTION CONTROL LANGUAGE
+-------------------------------------
+COMMIT,ROLLBACK,SAVEPOINT
+
+DRL -- DATA RETRIVEAL LANGUAGE
+------------------------------
+SELECT
+
+ Oracle Datatypes:
+ =================
+
+ Number[(p,s)]:-  this data is used to store numeric data
+                   maxisize we can store up to 38 digits
+                
+                 p--precision
+                 s--scale
+  ex:
+  ====
+
+  empno number
+ 
+  empno number(5)
+
+  sal  number(10,3); -- 10 is precision and 3 is scale.
+ 
+
+  Example:
+  =======
+   The precision is the number of digits in a number. It ranges from 1 to 38.
+   The scale is the number of digits to the right of the decimal point in a number. 
+    It ranges from -84 to 127.
+   
+   For example, the number 1234.56 has a precision of 6 and a scale of 2.
+   So to store this number, you need NUMBER(6,2).
+
+
+
+
+  char[(size)] :-  this is used to store fixed characters
+                  maximum size is 2000 bytes.
+
+  nchar[(size)] :-  this data type is used to store  
+                 national characters ,maxmimum size is 2000 bytes.
+
+  varchar(size) :- this data type is used to string type of data.
+                  maximum size is 2000 bytes.
+
+  varchar2(size) :-- this datda type is used to store string type of data
+                    maximum size is 4000 bytes.
+
+ Difference varchar(size) and varchar2(size):
+ ============================================
+
+ ex:
+  ===
+
+ ename varchar(10);                 ename varchar2(10);
+ suppose a user
+ enter smith			     suppose user
+ interanlly                             enter  smith
+         
+                                     internally the sql egine 
+ it will allocate                     will allocate the 
+ memory based on                      memory based on user 
+                                     enter value.
+ variable datatype size
+                                       ------
+----------			       smith
+smithnnnnn
+
+
+remaining character will
+be fillup with nullvalues
+at right side
+ 
+
+size if fixed                         size is variable value length
+
+
+
+
+Date:--  
+========
+        this datatype is used to store valid date
+          by default the oracle use the date format
+          DD-MON-YYYY.
+          Date range :- from 1 jan 4712 BC to 31 dec 9999 A.D
+
+ TImestamp:
+ ===========
+ thid datatype is used to store valid date(year,date,month) and time
+ (HH:MM:SS:MS)
+
+
+ AnsI(american national standards institution)
+ ===========================================
+  Int
+ Float
+ Decimal
+ varchar
+....etc
+
+
+ LOB (large binary objects)dataypes:
+ ====================================
+
+  Bfile :- it will stores the locations of file.
+ 
+ BLOB --to store unstructured data -- maximum size is 4gb.
+
+ ClOB -- to store character of binary single character or
+         multiple characters of data ---maximum size is 4gb.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ROWID:
+ ======
+ Every record in database contains physical address or rowid
+
+1001 smith 3000
+1001 smith 3000
+1003 raju   4000
+1005 rakesh 5000
+1001 smith  3000
+
+ XML:
+ ====
+ to store xml data --semi structure data --Introduced in oracle11g 
+
+Eg:
+===
+ <empi>
+ <empno>1001</empno>
+ <ename>smith</empno>
+ <sal>3000</3000>
+  </empid>
+
+
+
+
+
+
+
+ Note:
+ =====
+ insert the values for varchar,varchar2,date  datatypes
+ in single code('');
+
+
+ DDL:
+ =====
+
+ DDL stands for Data definition language.
+
+ DDL is used to define the definitions or schema or structure and
+ modify the definitions or schema or structure in the database.
+
+ DDl commands are auto commit commands.
+
+ DDL commands are
+ -----------------
+ create,alter,rename,truncate,drop
+
+
+create:
+=======
+
+create command is used to define the database objects.
+
+database objects are table,view,sequenc,procedure...etc
+
+
+To create a table syntax:
+========================
+
+syntax:
+=======
+
+
+create table <tablename>(
+               columnam1 datetype(size) [constraints],
+               columname2 datatype(size)[constraints],
+
+                 ---------
+                ----------------------
+		columnamen datatype(size)[constraints]
+             );
+
+
+tablename conventions:
+======================
+
+tablename should be 30 character
+tablename should contain numbers and underscore
+tablename cannot start with number.
+tablename is not case sensitive.
+tablename cannot contain space.
+
+ex1
+===
+create table emp11 it contains the columns
+
+columns          datatype       length
+empno             number          5
+ename		varchar2           10
+sal              number           10,2
+
+
+solu:
+=====
+create table emp11(empno number(5), ename varchar2(10),sal number(10,2));
+									1653.45
+or
+
+mysql
+------
+create table emp11(empno int(5),ename varchar(10),sal decimal(10,2));
+
+
+
+
+
+
+
+
+
+
+
+
+
+hiredate            date           default format
+
+
+sol:
+====
+
+create table  emp11(
+                     empno  number(5),
+                     ename  varchar2(10),
+                     sal    number(10,2),
+                    hiredate  date);
+
+
+
+
+Ex2:
+----
+create table  named as    product_11
+fields or columns --     pid,pname,price
+
+
+insert five records
+
+
+sol:
+====
+create table product_11(pid number(5),pname varchar2(10),price number(5,2)):
+
+Ex:3
+=====
+create table named as course
+
+fields or columnname   dataype   size
+cid                   number      4
+cname                 varchar2   20
+joindate              date
+course_end_date         date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+to list all the table from a user:
+===================================
+
+cmd:  select * from tab;
+
+
+to clear screen:
+=================
+cmd: cl scr
+
+
+to show the current user:
+==========================
+cmd: show user;
+
+
+to describe the table structure:
+================================
+
+syntax:
+========
+
+desc[ribe] tablename;
+
+
+
+Insert some records into emp11 table:
+=====================================
+
+
+syntax:
+=========
+
+insert into tablename values(column-value,----columnn-values);
+
+sol:
+====
+
+insert into emp11 values(1001,'smith',20000);
+
+insert into emp11 values(1002,'martin',30000);
+
+insert into emp11 values(1003,'chaitnaya',20000);
+
+insert into emp11 values(1004,'raju',10000);
+
+insert into emp11 values(1005,'harsha',40000);
+
+
+
+
+commit; --to store the records permanently in table. 
+
+
+to list all the records from the table:
+=======================================
+
+syntax:
+-======
+
+select * from tablename;
+
+ex:
+===
+
+select * from emp11;
+
+
+copy a table with schema with out data from existing table
+==========================================================
+
+syntax:
+========
+
+create table tablename as select * or[specific columns]
+                               from tablename where anyfalse condition;
+
+
+ex2:
+====
+
+create a table emp_11(empno,ename,sal) from emp11 table without data.
+
+solu:
+======
+
+
+create table emp_11 as select empno,ename,sal from emp11 where 1=2;
+
+
+copy a table with schema with data from existing table
+==========================================================
+
+syntax:
+=======
+
+create table tablename as select * or[specific columns]
+                                       from tablename;
+
+
+ex:
+===
+
+create a table emp_with_date (empno,ename,sal) from
+existing table emp11 with data.
+
+
+sol:
+====
+
+create table emp_with_data as select empno,ename from emp11;
+
+
+to clear the screen:
+====================
+
+oracle -- cl scr
+mysql -- clear or  ctrl+L
+trainingDB2 -- !cls
+
+
+Alter:
+=======
+
+alter command is used to modify the definition(structure) of a table.
+
+
+1)to add a new column to an existing table:
+============================================
+
+syntax:
+=======
+
+alter table tablename add columname datatype ;
+
+or
+
+alter table tablename add (column datatype,columname datatype);
+
+note:
+=====
+
+all columns added to table at last.
+
+
+2)modify the column datatype size or change column datatype
+============================================================
+
+note:
+=====
+
+to decrease the size of a column first we need to make
+column as empty.
+
+to change the column datatype then first we need to
+make the column as empty.
+
+
+syntax:
+========
+
+alter table tablename  modify  columnname datatype(size)
+
+ or
+
+alter table tablename modify  (columnname datatype(size),columname datatype(size));
+
+
+3) to drop a column from the table:
+====================================
+
+syntax:
+=======
+
+alter table tablename drop column  columname;
+
+
+4) to rename  a column:
+========================
+
+syntax:
+=========
+
+alter table tablename rename column  colunname to newcolumname;
+
+
+
+
+5)to add a constraint for column:
+==================================
+
+syntax
+------
+alter table tablename add constraint constraintname;
+
+
+6) to drop a constraint for a column:
+======================================
+
+syntax:
+========
+
+alter table  tablename drop constraint  constraintname;
+
+
+example:
+=========
+Already we have emp11 table:
+
+
+alter operations on emp11:
+==========================
+
+a) add column mobileno 
+
+sol:
+=====
+alter table emp11 add mobileno number(10);
+
+
+b) add columns address,job
+============================
+sol:
+---------
+
+alter table emp11 add (address varchar2(20),job varchar2(20));
+
+
+c)current size of ename is 10 then
+  increase the size of ename column to 20;
+
+sol:
+=====
+
+alter table emp11 modify ename varchar2(20);
+
+
+d) alter the datatype of mobileNo from number to varchar
+
+sol:
+----
+alter table emp11 modify mobileno varchar2(10);
+
+mysql
+-----
+alter table emp11 modify mobileno varchar(10);
+
+Ex:
+---
+increase the size of ename column 10 to 20 
+
+--
+alter table emp11 modify ename varchar(20);
+
+
+d)drop a column  address;
+
+sol:
+====
+
+alter table emp11 drop column address;
+
+
+e)rename a column job  to designation
+==========================================
+
+sol:
+----
+alter table emp11 rename column  job to designation;
+
+
+7) adding  constraint at alter level:
+--------------------------------------
+add primary key for existing table emp11 for empno.
+
+sol:
+----
+alter table emp11 add primary key(empno);
+
+
+
+RENAME(for table name):
+==================
+Rename is  used to rename the table.
+
+syntax:
+=======
+oracle:
+-------
+rename oldtablename to  newtablename;
+
+mysql:
+------
+rename table oldtablename to  newtablename;
+
+ex:
+===
+write a query to rename a product_11 to product_22 ?
+
+Ex:
+---
+Mysql:
+------
+rename table product_11 to product_22;
+
+
+truncate:
+=========
+
+this command is used to delete all the records or data
+from the table but not schema. we cannot rollback(truncate is
+auto commit cmd).
+
+syntax:
+=========
+
+truncate table tablename;
+
+ex:
+===
+
+write a query to trunate a table emp11 ?
+
+sol:
+===
+
+truncate table emp11;
+
+
+Drop :
+======
+
+this command is used to drop  the database objects. 
+it will drop data from the table as well as schema.
+
+database objects:- table,view,sequence,procedure..etc
+
+
+to drop a table:
+=================
+
+syntax:
+-------
+
+drop table tablename;
+
+or
+
+to drop a table which contains constraint:
+==========================================
+syntax:
+=======
+drop table tablename cascade constraints;
+
+
+DML
+====
+DML stands Data Manipulation language.
+
+Dml commands are not auto commit commands,
+we need to explicitly commit the DML statements.
+
+DMl commands are:
+==================
+insert,update,delete
+
+
+insert:
+======
+insert command is used to add record into a table.
+
+syntax:
+=======
+insert into tablename values(column value1,col-value2...,colvalue-N);
+
+EX:
+---
+create table emp11(empno int(5),ename varchar(10),sal decimal(10,2));
+
+insert into emp11 values(1001,'smith',20000);
+
+insert into emp11 values(1002,'martin',30000);
+
+insert into emp11 values(1003,'chaitnaya',20000);
+
+insert into emp11 values(1004,'raju',10000);
+
+insert into emp11 values(1005,'harsha',40000);
+
+
+insert  with specific columns:
+================================
+
+it is used to insert the data for specific columns
+
+syntax:
+=======
+
+
+insert into tablename (columnname1,coluname2,---columname3)
+             values(columnvalue1,columnvalue2,---columnname3);
+
+ex:
+====
+
+write a query to insert record for specific columns(empno,ename) into 
+table emp11;
+
+sol:
+====
+
+insert into emp11 (empno,ename) values(1005,'dsds');
+
+or
+insert into emp11 (empno,ename) values(&empno,'&ename');
+
+
+
+insert into select
+=================
+
+syntax:
+========
+
+insert into trg_tablename select columnslist from src_tablename;
+
+note:
+=====
+the trg_tablename columnames and src_tablename columns
+should have the same schema(column data type).
+
+Ex:
+---
+create table emp_dup(empno int(5),ename varchar(10));
+
+insert into emp_dup select empno,ename from emp11;
+
+
+
+
+update:
+=======
+update is used to modify the column values.
+
+syntax:
+=========
+update tablename set columname=value,columnname=value where condition
+
+note:
+=====
+if where condition is not specified total records will be
+updated in the table.
+
+ex:
+===
+
+write a query to update a column ename raju to another name
+where empno 1004?
+
+solu:
+=====
+
+update emp11 set ename='rajuhadoop' where empno=1004;
+
+ex:
+---
+update the sal column of empno =1006.
+
+sol:
+----
+update emp11 set sal=4000 where empno=1006
+
+
+
+
+
+
+
+
+
+
+
+write a query to update a column ename and sal where
+empno 1005?
+
+sol:
+=====
+
+update emp_11 set ename='sdsd',sal=4000 where empno=1005;
+
+
+Assignment:
+===============
+update as select;
+Difference between truncate and delete?
+
+
+
+delete:
+========
+
+this command is used to delete a specific record
+or all the records.
+
+
+syntax:
+=======
+
+delete from tablename where condition; --specific record
+
+or
+
+delete from tablename -----all record will be deleted.
+
+or
+
+delete tablename where condition.
+
+
+ex:
+---
+delete the record of empno 1006
+
+sol: delete from emp11 where empno=1006;
+
+
+Exercise
+-------------------------------
+1. Create table emp12 from table emp ?(Hint : use emp table)-->copy a table
+    Ans: create table emp12 as select * from emp;
+
+2. create table emp13 from emp and into the new table copy only the structure but do not copy data ?
+   Ans: create table emp13 as select * from emp where 5=10
+
+
+3. Increase size of ENAME field to 20 use emp13 table?
+   Ans: alter table emp13 modify ename varchar(20);
+
+
+ALias names:
+=============
+
+alias name is temporary name for column or table.
+
+syntax:
+=======
+
+coluname  as aliasname
+
+or
+
+columname aliasname
+
+columnae "Hire_date"
+
+
+ex:
+====
+
+select empno,ename,sal as salary from emp_11;
+
+
+select e.empno,e.ename,e.sal from emp e;
+
+
+ CONSTRAINTS:
+ ============
+ CONSTRAINT IS A RULE OR RESTRICTION WHICH IMPOSED ON COLUMNS
+ OF THE TABLE.
+ 
+ CONSTRAINTS CAN BE APPLIED AT THE TIME OF COLUMN DEFINITION.
+
+ CONSTRAINTS CAN BE APPLIED AFTER THE TABLE DEFINITION
+
+ CONSTRAINSTS CAN BE APPLIED AT THE ALTER .
+
+
+ CONSTRAINTS ARE DIVIDED INTO THREE
+
+ 1)DOMAIN INTEGRITY CONSTRAINTS
+ -------------------------------
+ NOT NULL
+ CHECK
+
+ 2)ENTITY INTEGRITY CONSTRAINTS
+ --------------------------------
+
+ UNIQUE
+ PRIMARY KEY
+
+ 3)REFERENTIAL INTEGRITY CONSTRAINTS
+ ------------------------------------
+
+ FOREIGN KEY
+
+
+  1)DOMAIN INTEGRITY CONSTRAINTS:
+  ================================
+
+   NOT NULL :
+    ==========
+
+   NOT NULL CONSTRAINT ARE USED TO AVOID NULL VALUES FOR THE
+   SPECIFIED COLUMNS.
+
+   WE CAN APPLY THESE CONSTRAINT AT COLUMN-LEVEL
+
+  EX:
+  ===
+
+  CREATE A TABLE WITH NOT NULL CONSTRAINT WITH OUT NAME FOR EMPNO COLUMN.
+
+  SOL:
+  ====
+
+  CREATE TABLE EMP_1(EMPNO int NOT NULL,
+                          ENAME VARCHar(10),SAL 
+                          decimal(10,2));
+ 
+ insert into emp_1 values(null,'smith',4000); //in valid
+   Error : empno cannot be null
+
+
+ insert into emp_1 values(101,'martin',null);//valid
+ insert into emp_1 values(102,null,4000);  //valid
+
+
+
+check constraint:
+------------------
+Based on condition to restrict columns.
+
+syntax:
+------
+check (condition)
+
+Ex:
+----
+create a table named as emp_2 which contain fours (empno,ename,sal,gender)
+using check constraint  restrict the user to choose either (M or F)
+
+sol:
+----
+create table emp_2 (empno int not null,ename varchar(10),sal decimal(10,2),
+                       gender char(1) check (gender='M' or gender='F'));
+
+
+insert into emp_2 values(1001,'smith',4000,'c');   //invalid
+ERROR 3819 (HY000): Check constraint 'emp_2_chk_1' is violated.
+
+insert into emp_2 values(1001,'smith',4000,'M'); //valid
+
+
+
+unique:
+-------
+Unique constraint restrict the enduser not to enter null values and duplicates.
+
+syntax:
+-------
+unique(columname)
+
+ex:
+----
+create a table product(pid,pname,price)
+apply the constraints unique constraint to pid
+                       for pname,price not null
+
+
+sol:
+-----
+create table product(pid int(5) unique,
+                       pname varchar(10) not null,
+                        price float not null);
+
+
+insert into product values(1,'mouse',400);//valid
+insert into product values(null,'pendrive',800);//valid
+insert into product values(1,'ram',4000);//invalid
+ errorcode : duplicate entry
+
+
+primary key:
+-------------
+it a combination of NOT NUll + Unique
+
+A table contain have one primary key.
+
+syntax:-
+--------
+alter level:
+------------
+
+alter table tablename add primary key(columname);
+
+
+column level:
+-------------
+syntax: create table(colunname1 datatype primary key,
+                      columname2 datatype,
+                      columname3 datatype);
+
+ex:
+---
+create table item(itemid ,itemname,qunatity).
+Here add the primpary at column level for itemid)
+
+sol:
+----
+
+create table item(itemid int(4) primary key,
+                    itemName varchar(10),
+                    quantity int(4));
+
+
+insert into item(null,'fastfood',4);//  error  itemid cannot be null
+insert into item(1,'juices',5);//valid
+insert into item(1,'fruits',5); //duplicate entry found
+
+
+
+table-level:
+=-------------
+create table item2(itemid int(4),
+                    itemName varchar(10),
+                    quantity int(4),
+                    primary key(itemid));  //table-level
+
+
+
+
+insert into item2(null,'fastfood',4);//  error  itemid cannot be null
+insert into item2(1,'juices',5);//valid
+insert into item2(1,'fruits',5); //duplicate entry found
+
+
+foreign key:
+-------------
+To make parent and child relation ship between the tables.
+
+Will use keyword : REFERENCES
+
+To make relation the tables should conatin common column.
+
+
+Ex2:
+----
+Address Table(aid -pk,state,pin) --Parent
+Employee Table(eid -pk,ename,sal,aid ) --Child
+
+Create a relation with Address and employee table using foreign key at table level.
+
+Table level syntax:
+------------------
+foreign key(childtable column name) references parenttable(primary key column name)
+
+Ex:
+---
+create table address(aid int(4) primary key,state varchar(10),pin int(6));
+
+
+create table employee(eid int(4) primary key, ename varchar(10),sal decimal(10,2),
+                          aid int(4),
+                          foreign key(aid) references address(aid));
+
+
+First insert the data in address:
+---------------------------------
+
+insert into address(1,'Mumbai',500043);
+insert into address(2, 'hyd',500053);
+
+
+Employee:
+---------
+insert into employee(1001,'smith',4000,2);
+insert into employee(1002,'martin',5000,1);
+
+
+insert into employee(1003,'Allen',4000,3);//foreign key constraint failed
+
+delete from address where aid=1; //Cannot delete or update a parent row: a foreign key constraint fails
+
+
+Restrictions on foreign key:
+---------------------------
+On delete cascade:- to delete a record from parent table along with depends records will deleted.
+
+synatx:
+===========
+foreign key(childtable column name) references parenttable(primary key column name) on delete cascade;
+
+Ex:
+---
+create table address_1(aid int(4) primary key,state varchar(10),pin int(6));
+
+
+create table employee_1(eid int(4) primary key, ename varchar(10),sal decimal(10,2),
+                          aid int(4),
+                          foreign key(aid) references address(aid) on delete cascade);
+
+First insert the data in address:
+---------------------------------
+
+insert into address_1(1,'Mumbai',500043);
+insert into address(2, 'hyd',500053);
+
+Employee:
+---------
+insert into employee_1(1001,'smith',4000,2);
+insert into employee_1(1002,'martin',5000,1);
+
+insert into employee(1003,'Allen',4000,3);//foreign key constraint failed
+delete from address where aid=1; // it will delete parent and child records.
+
+
+to list all the constraints on a table:
+---------------------------------------
+show create table tablename;
+
+ex:
+---
+show create table employee;
+
+
+from above the command get the name of the constraint, and drop the constraint using alter
+ex:
+---
+alter table employee drop foreign key employee_ibfk_1;
+
+
+to drop a primary key:
+------------------------
+alter table customer drop primary key;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ RELATIONAL OPERATORS:
+ =====================
+  > -- GREATER THAN
+  <  --- LESS THAN
+  <= ---LESS THAN OR EQUAL TO
+  >= --- GREATER THAN OR EQUAL TO
+  == --- EQUAL TO
+  !=  <>  -- NOT EQUAL TO
+
+  BETWEEN -- RETURNS THE VALUE ,THE VALUE SPECIFIED IN THE RANGE.
+            (INCLUSIVE)
+
+  IN --- RETURNS THE VALUE ,THE VALUE AVAILABLE IN THE
+                          GIVEN LIST OF VALUES.
+
+ EXAMPLES:
+ =========
+
+  1)WRITE  A QUERY TO DISPLAY THE RECORDS WHERE SAL LESS THAN 2000
+  FROM EMP TABLE
+
+ SOL:
+ ====
+
+  SELECT * FORM EMP WHERE SAL<2000;
+
+  O/P:- 8 RECORDS.
+
+
+ 2)WRITE A QUERY TO DISPLAY RECORD WITH SPECIFIED RANGE
+  SAL 2000 AND 3000;
+
+ SOL:
+ ====
+
+ SELECT * FROM EMP WHERE SAL>=2000 AND SAL<=3000; 
+
+ OR
+
+ SELECT * FROM EMP WHERE SAL BETWEEN 2000 AND 3000; 
+
+ OLP:-5 RECORDS
+
+
+ 3)WRITE A QUERY TO DISPLAY THE RECORDS BASED ON IN WHERE
+ SAL 1000,2000,3000 ON EMP TABLE.
+
+ SOL:
+ ====
+
+ SELECT * FROM EMP WHERE SAL=1000 OR SAL= 2000 OR SAL=3000;
+ OR
+ SELECT * FROM EMP WHERE SAL IN(1000,2000,3000);
+
+
+ ORDER BY CLAUSE:
+ ================
+ THIS CLAUSE IS USED TO SORT THE OUTPUT STATEMENT BASED ON SELECT
+ QUERY.
+
+ BY DEFAULT IT SORT ASCENDING OR ASC
+
+ DESCENDING  
+ -----------
+DESC
+
+ SYNTAX:
+ ========
+ SELECT * FROM TABLENAME [WHERE][group by] [having by] [ORDER BY COLUMNANME...]
+
+ EX:
+ ===
+  WRITE A QUERY TO DISPLAY THE RECORD FROMM EMP BASED ON
+  SAL COLUMN IN ASCENDING.
+
+  SOL:
+  =====
+  SELECT * FROM EMP ORDER BY SAL ;
+
+  OR
+
+  SELECT * FROM EMP ORDER BY SAL DESC; --DESCENDING ORDER
+
+
+
+  GROUPED FUNCTIONS OR AGGREGATE FUNCTION OR SINGLE ROW FUNCTIONS:
+  =================================================================
+
+  SUM 
+  AVG
+  MIN
+  MAX
+  COUNT
+ 
+  DISTINCT -- TO REMOVE DUPLICATE VALUES
+
+
+  EX:
+  ===
+
+  1)WRITE A QUERY TO COUNT NO OF RECORDS IN EMP TABLE.
+
+  SOL:
+ 
+  ====
+
+   SELECT COUNT(*) FROM EMP;
+
+  2)WRITE A QUERY TO FIND MAX SAL FROM EMP.
+ 
+  SOL:
+  ====
+
+  SELECT MAX(SAL) FROM EMP;
+
+
+ 3) WRITE A QUERY TO FIND SECOND MAX SAL.
+   WE CAN WRITE THIS QUERY USING DENSE RANK OR SUBQUERY.
+
+
+ 4) WRITE A  QUERY TO PEFROM SUM OF SAL  OF ALL EMPLOYESS  IN EMP TABLE.
+ 
+SOL:
+====
+SELECT SUM(SAL) FROM EMP;
+
+O/P: 30325
+
+ 5)select Distinct(sal) from emp;
+
+
+ GROUP BY CLAUSE:
+ ================
+ THIS CLAUSE IS USED TO GROUP OF RELATED INFORMATION.
+
+
+ SYNTAX:
+ =======
+
+  SELECT * FROM TABLNAME [WHERE][GROUP BY COLUMNNAME][ORDER BY COLUMNS];
+
+ EX
+ ===
+ WRITE A QUERY TO PERFORM SUM OF SALARIES BASED ON EACH
+ DEPARTMENT NO FROM EMP TABLE.
+
+ SOL:
+ ====
+ SELECT DEPTNO,SUM(SAL) FROM EMP GROUP BY DEPTNO;
+
+
+ 2) WRITE A QUERY TO PERFROM SUM OF SALARIES BASED ON EACH
+  DEPARMTENT NO AND COUNT NO EMPLOYESS IN EACH DEPT FROM EMP.
+
+SOL:
+====
+SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
+
+
+  3)WRITE A QUERY TO PEFROM SUM OF SALARIES BASED ON
+   EACH DEPTNO AND EACH JOB .
+
+  SOL:
+  ====
+
+  SELECT DEPTNO,JOB,SUM(SAL),count(*) FROM EMP GROUP BY DEPTNO,JOB;
+
+
+
+
+
+  
+  3)Having clause:
+  ================
+ to filter the grouped the data then we need to go for having clause;
+  
+  syntax:
+  -------
+   select * from tablename [where][group by][having][order by]
+
+   Ex;
+   ===
+   Write a query to sum(sal) of each dept greater 8750?
+
+   sol:
+
+   select Dept,sum(sal) from emp group by deptno having sum(sal)>8750  order by deptno
+
