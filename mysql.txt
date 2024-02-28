@@ -1992,3 +1992,181 @@ insert into orders values(70004,110.5,'2012-08-17',3009,5003);
 insert into orders values(70007,948.5,'2012-09-10',3005,5002);
 insert into orders values(70005,2400.6,'2012-07-27',3007,5001);
 insert into orders values(70008,5760,'2012-09-10',3002,5001);
+
+
+
+Subqueries:
+----------
+Subqueries () are used to get the result based on unknown values. 
+
+They are different type.
+
+1.Single Row subquery
+2.Multiple Row subquery
+3.Multiple column subquery
+4.Co−related subquery
+5.Scalar subquery
+6.Inline view
+
+*Single Row Subquery:
+---------------------
+When subquery returns one row (1 value). It is called Single RowSubquery.
+
+Ex: write a query to display details are having salary > 'ALLENS' sal ?
+
+Select * from emp where sal > (select sal from emp where ename = 'ALLEN'); 
+
+Note:
+-----
+Subqueries are executed first and then parent query is executed by using the result of sub query.
+
+
+Level Two query:
+----------------
+Select * from emp where job = (select job from emp where ename = 'ALLEN') AND job = (select job from emp where ename = 'BLAKE');
+
+
+Level Three query(nested sub-query):
+------------------------------------
+Select * from emp where sal > (select sal from emp Where ename = (select ename from emp Where empno = 7499));
+
+
+Note: 
+-----
+The above query is three level query. Sub query can be nested upto 32 levels.
+
+
+
+**Multiple Row Subquery:
+------------------------
+When subquery returns multiple rows. It is called multiple row salary.
+
+Note: we should use multiple row operators with multiple row subqueries. 
+
+They are three multiple row operators.
+1.IN
+2.ANY
+3.ALL
+
+
+All:
+----
+Select * from emp Where sal > ALL(Select sal from emp Where deptno = 30);
+
+Any:
+-----
+Select * from emp where sal > ANY(select sal from emp where deptno = 30); or condition
+
+internally:
+-----------
+select * from emp where sal > ANY(1600,1250,1250,2850);
+
+
+Select * from emp where sal < Any(select sal from emp where deptno = 30);
+
+
+*IN: 
+-----
+Select * from emp where ename IN('ALLEN', 'KING','FORD');
+
+or
+
+Select * from emp where ename IN(select ename from emp where deptno = 30);
+
+Select * from emp where sal IN(select sal from emp where deptno = 30);
+
+
+
+
+
+
+
+
+*MULTIPLE COLUMN SUBQUERY:
+--------------------------
+When subquery return more then one column. It is called multiple column subquery. 
+We should use in operator with multiple column subqueries.
+
+Select * from emp where(job,sal) IN(select job, sal from emp where deptno = 30); 
+
+
+Exercise:
+---------
+write a subquery to find second highest salary emp table.
+
+sol:
+----
+select max(sal) from emp where sal < (select max(sal) from emp);
+
+
+
+
+
+
+
+Co-RELATED SUBQUERY:
+--------------------
+When subquery is executed in relation to parent query, it is called co−related subquery.
+
+*write a query to display all the rows who are having salary greater than AVG salary his department?
+
+Ex:
+----
+Select * from emp e where sal > (select AVG(sal) from emp where deptno = e.deptno);
+
+Execution:
+----------
+The above example is a co−related subquery.
+In co−related subquery, parent query is executed first and then subquery is executed in relation to result of parent query(parenet table alias name).
+
+
+
+SCALAR subquery: 
+---------------
+when we use subquery in the select clause. It is called as Scalar subquery.
+Scalar subquery are also called sub select.
+
+write a query to display following output?
+
+Deptno	Dname	        Loc		sumsal
+10	Accounting	New York	8750
+20	Research	Dallas		10875
+30	Sales	        Chicago		14400
+40	Operations	Boston		−−−−−−
+
+
+Ex:
+----
+Select deptno, dname, loc, (Select sum(sal) from emp where deptno = d.deptno) Sum_sal from dept d;
+
+
+
+*INLINE VIEW:
+-------------
+When a subquery is used in from clause. It is called INLINE view.
+
+Ex:
+------
+select dept.deptno, subquery1.total_amt from dept, ( select emp.deptno, Sum(emp.sal) total_amt
+ from emp group by deptno) subquery1 WHERE subquery1.deptno = dept.deptno
+
+
+Exercises On Subqueries:
+-------------------------
+1. Write a query to display the employee name and hiredate for all
+employees in the same department as Blake. Exclude Blake.
+
+2.Create a query to display the employee number and name for all employees who earn
+more than the average salary. Sort the results in descending order of salary.
+
+3.Write a query to display the employee number and name for all
+employees who work in a department with any employee whose name
+contains a T. 
+
+4.Display the employee name, department number, and job title for all
+employees whose department location is Dallas. 
+
+5.Display the employee name and salary of all employees who report to King.
+
+
+
