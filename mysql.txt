@@ -1773,3 +1773,213 @@ SOL:
 
 SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
 FROM EMP E,SALGRADE S WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+
+
+
+
+VIEWS:
+======
+A VIEW IS A LOGICAL REPRESENTATION OF DATA FROM ONE OR MORE THEN ONE TABLE.
+
+A VIEW DOES NOT CONTAIN PHYSICAL STORAGE.
+
+A VIEW IS VIRTUAL TABLE.
+
+View does not contain any data.  
+
+When we write select statement on view, we get the data from the table for the first time.
+
+Advantages of MySQL Views
+-------------------------
+MySQL views bring the following advantages.
+
+1) Simplify complex query
+Views help simplify complex queries. If you have any frequently used complex query, you can create a view based on it so that you can reference the view by using a simple SELECT statement instead of typing the query all over again.
+
+2) Make the business logic consistent
+Suppose you have to repeatedly write the same formula in every query.  Or you have a query that has complex business logic. To make this logic consistent across queries, you can use a view to store the calculation and hide the complexity.
+
+3) Add extra security layers
+
+A table may expose a lot of data including sensitive data such as personal and banking information.
+
+By using views and privileges, you can limit which data users can access by exposing only the necessary data to them.
+
+For example, the table employees may contain SSN and address information, which should be accessible by the HR department only.
+
+To expose general information such as first name, last name, and gender to the General Administration (GA) department, you can create a view based on these columns and grant the users of the GA department the view, not the entire table employees .
+
+
+ TYPES OF VIEW:
+ ==============
+
+ 1)SIMPLE VIEW
+ 2)COMPLEX VIEW
+
+
+ SIMPLE VIEW:
+ ============
+ 1) A VIEW IS CREATED BASED ON SINGLE TABLE.
+
+ 2)IN SIMPLE VIEW DOESNOT CONTAIN FUNCTIONS OR GROUP BY CLAUSES.
+
+ 3)WE CAN PERFORM DML OPERATION ON SIMPLE VIEW.
+
+
+ SYNTAX:
+ ========
+ CREATE OR REPLACE VIEW  VIEWNAME  AS SELECT * [SPECIFIC COLUMNS]
+                                   FROM TABLENAME;
+
+ EX:
+ ===
+ CREATE A VIEW ON EMP TABLE IT CONTAINS THREE COLUMNS
+ EMPNO,ENAME,SAL
+
+SOL:
+====
+CREATE or replace  VIEW EMP_V1 AS SELECT EMPNO,ENAME,SAL FROM EMP;
+
+
+TO DISPLAY THE VIEW OUT PUT:
+=============================
+SELECT * FROM VIEWNAME;
+
+ex:
+====
+select * from emp_v1;
+
+
+to drop a view:
+===============
+drop view viewname;
+
+
+
+ COMPLEX VIEW:
+ =============
+
+ A VIEW IS CREATED BASED ON MORE THAN ONE TABLE(JOINS).
+
+ A COMPLEX VIEW CAN CONTAIN FUNCTIONs OR GROUP BY CLAUSE.
+
+ A DML OPERATION PERFROMED ON COMPLEX VIEW INDIRECTLY.
+
+ SYNTAX:
+  =======
+
+ CREATE OR REPLACE VIEW VIEWNAME AS SELECT * FROM TWOTABLES;
+
+ EX:
+ ===
+ CREATE COMPLEX VIEW TO STORE EQUI JOIN OUTPUT OF DEPT AND EMP TABLE.
+
+ SOL:
+ ====
+ CREATE OR REPLACE VIEW EMP_DEPT_EQ AS
+     SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM 
+         DEPT D JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+
+
+
+
+Read Only View:
+===============
+We can restrict DML operation views by creating read only view.
+Ex:
+
+Create or replace view v3 As select empno, ename, sal, deptno from emp with read only; 
+
+
+
+With Check Option View::
+====================
+These views will allow DML operation only when where condition is satisfied. 
+
+Ex:
+Create view Test_V12
+As select empno, ename, sal, deptno from emp Where deptno = 30 With check option;
+
+
+ex:
+insert into test_v12 values(7143,'RAJESH',5000,30) //valid
+insert into test_v12 values(7323,'RAJESH',5000,10) //invalid
+
+
+
+
+Different between simple and complex views?
+
+Simple view						Complex view
+1.Created by using only one table.	  1. Created by using multiple tables.
+2.DML operations are allowed.		  2. DML operations are not allowed.
+3.Should not be created using		  3. Can be created using arithmetic arithmetic operations or functions  operations                      or functions or or group by clauses.
+group by clauses.
+
+
+
+Exercises:
+----------
+salesman
+---------
+create below table.
+
+ salesman_id |    name    |   city   | commission 
+-------------+------------+----------+------------
+        5001 | James Hoog | New York |       0.15
+        5002 | Nail Knite | Paris    |       0.13  
+        5005 | Pit Alex   | London   |       0.11
+        5006 | Mc Lyon    | Paris    |       0.14
+        5007 | Paul Adam  | Rome     |       0.13
+        5003 | Lauson Hen | San Jose |       0.12
+
+
+1. From the following table, create a view for those salespeople who belong to the city of New York. 
+2. From the following table, create a view for all salespersons. Return salesperson ID, name, and city.  
+3. From the following table, create a view to locate the salespeople in the city 'New York'.
+
+
+4. From the following table, create a view to count the number of unique customers, compute the average and the total purchase amount of customer orders by each date.
+
+tables:
+-------- 
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+        3008 | Julian Green   | London     |   300 |        5002
+        3004 | Fabian Johnson | Paris      |   300 |        5006
+        3009 | Geoff Cameron  | Berlin     |   100 |        5003
+        3003 | Jozy Altidor   | Moscow     |   200 |        5007
+        3001 | Brad Guzan     | London     |       |        5005
+
+
+create table customer(customer_id int,cust_name varchar(20),city varchar(10),grade int,salesman_id int);
+
+insert into customer values(3002,'Nick Rimando','New York',100,5001);
+insert into customer values(3007,'Brad Davis','New York',200 ,5001);
+insert into customer values (3005,'Graham Zusi','California',200,5002);
+insert into customer values (3008,'Julian Green',' London',300,5002);
+insert into customer values (3004,'Fabian Johnson','Paris',300,5006);
+insert into customer values (3009,'Geoff Cameron','Berlin',100,5003);
+insert into customer values (3003,'Jozy Altidor','Moscow',200,5007);
+insert into customer values (3001,' Brad Guzan','London',null,5005);
+
+orders:
+---------
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70001       150.5       2012-10-05  3005         5002
+70009       270.65      2012-09-10  3001         5005
+70002       65.26       2012-10-05  3002         5001
+70004       110.5       2012-08-17  3009         5003
+70007       948.5       2012-09-10  3005         5002
+70005       2400.6      2012-07-27  3007         5001
+
+
