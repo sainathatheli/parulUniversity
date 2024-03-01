@@ -351,28 +351,12 @@ sal              number           10,2
 solu:
 =====
 create table emp11(empno number(5), ename varchar2(10),sal number(10,2));
-									1653.45
+								
 or
 
 mysql
 ------
 create table emp11(empno int(5),ename varchar(10),sal decimal(10,2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-hiredate            date           default format
-
-
 sol:
 ====
 
@@ -407,22 +391,6 @@ cid                   number      4
 cname                 varchar2   20
 joindate              date
 course_end_date         date
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
 to list all the table from a user:
@@ -542,8 +510,8 @@ to clear the screen:
 ====================
 
 oracle -- cl scr
-mysql -- clear or  ctrl+L(ubuntu or linux) or windows (\!cls)
-IBMDB2 -- !cls
+mysql -- clear or  ctrl+L
+IBMDB2 !cls
 
 
 Alter:
@@ -1167,7 +1135,7 @@ To make parent and child relation ship between the tables.
 
 Will use keyword : REFERENCES
 
-To make relation the tables should conatin common column.
+To make relation the tables should contain common column.
 
 
 Ex2:
@@ -1259,7 +1227,6 @@ alter table employee drop foreign key employee_ibfk_1;
 to drop a primary key:
 ------------------------
 alter table customer drop primary key;
-
 
 
  RELATIONAL OPERATORS:
@@ -1428,8 +1395,9 @@ SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
   ====
 
   SELECT DEPTNO,JOB,SUM(SAL),count(*) FROM EMP GROUP BY DEPTNO,JOB;
-  
-  3)Having clause:
+
+
+ 3)Having clause:
   ================
  to filter the grouped the data then we need to go for having clause;
   
@@ -1445,18 +1413,55 @@ SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
 
    select Dept,sum(sal) from emp group by deptno having sum(sal)>8750  order by deptno
 
+  or
+
+ select deptno,sum(sal) as sumsal from emp group by deptno having sumsal>8750 order by deptno desc
+   
+   LIKE OPERATOR:
+ ==============
+
+  IT WILL RETRUN THE VALUE BASED ON SEARCH OF PATTERN
+
+  THERE ARE TWO PATTERNS
+
+  %   ->PERCENATAGE-- REPRESENT ONE OR MORE CHARACTERS
+  _   ->UNDERSCORE -- REPRESENT SINGLE CHARACTER
+
+  SYNTAX:
+  =======
+
+  LIKE 'PATTERN'
+
+ EX:
+ ===
+  WRITE A QUERY TO DISPALY ALL ENAMES FROM EMP
+  WHERE ENAME START WITH S.
+
+ SOL:
+ ====
+  SELECT ENAME FROM EMP WHERE ENAME LIKE 'S%';
+
+  ex:
+  ===
+  write a query to display all enames start with
+
+  sol:
+  =====
+
+  select ename from emp where ename like 'A_L%';
+
+
 
  JOINS:
   ======
-   Join are used to retrieve the records from multiple tables .
+  Join are used to retrieve the records from multiple tables .
 
-   join are used to create temporary a relation between the tables
-   based on common column.
+  join are used to create temporary a relation between the tables
+  based on common column.
 
-   if suppose we have n -tables ,then the atleast the possible
-   join conditions are n-1.
+  if suppose we have n -tables ,then the atleast the possible join conditions are n-1.
 
-   join are performed based on a common column datatype.
+  join are performed based on a common column datatype.
 
 
   There are two types of joins
@@ -1472,17 +1477,14 @@ SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
   cross join
  
 
-
  equi-joins:
  ============
-
-  this joins performed based on equal operator (=).
+ this joins performed based on equal operator (=).
 
 
  inner join:
  ============
-
-  this join return or fetch all records based on condition matched.
+ this join return or fetch all records based on condition matched.
 
  syntax:
  =======
@@ -1668,17 +1670,12 @@ ON (D.DEPTNO=S.DEPTNO);
 O/P- 22 ROWS:
 
 
+SELF JOIN:
+==========
+A SELF JOIN is  a join of a table itself.
 
-
-
- SELF JOIN:
- ==========
-
- A SELF JOIN is  a join of a table itself.
-
- note:
- =====
-
+note:
+=====
  two table alias name we need to specify in from clause
  of same table.
 
@@ -1693,9 +1690,6 @@ O/P- 22 ROWS:
  ====
  select e.ename,m.ename as manager from emp e,emp m
  where e.mgr=m.empno;
-
-
-
 
 
  CROSS JOIN:
@@ -1737,7 +1731,6 @@ SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME FROM
 
  NOTE:
  ===== 
-
  IN NATURAL JOIN THE COMMON COLUMN NAME BETWEEN  THE TWO TABLE
  MUST BE SAME. IF NOT IT WILL PERFORM CROSS JOIN
 
@@ -1773,8 +1766,6 @@ SOL:
 
 SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
 FROM EMP E,SALGRADE S WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;
-
-
 
 
 
@@ -1938,11 +1929,16 @@ create below table.
 
 1. From the following table, create a view for those salespeople who belong to the city of New York. 
 2. From the following table, create a view for all salespersons. Return salesperson ID, name, and city.  
-3. From the following table, create a view to locate the salespeople in the city 'New York'.
 
+3. From the following table, create a view to locate the salespeople in the city 'New York'.
 
 4. From the following table, create a view to count the number of unique customers, compute the average and the total purchase amount of customer orders by each date.
 
+sol:
+----
+create  or replace view v_2 as select ord_date,count(distinct(customer_id)) as uniqueCustomer,
+avg(purch_amt) as avg,sum(purch_amt) as sum from orders group by ord_date ;
+ 
 tables:
 -------- 
 Sample table: customer
@@ -1981,7 +1977,7 @@ ord_no      purch_amt   ord_date    customer_id  salesman_id
 70004       110.5       2012-08-17  3009         5003
 70007       948.5       2012-09-10  3005         5002
 70005       2400.6      2012-07-27  3007         5001
-
+70008       5760        2012-09-10  3002         5001
 
 create table orders (ord_no int,purch_amt float,ord_date date,customer_id int,salesman_id int);
 
@@ -1992,6 +1988,30 @@ insert into orders values(70004,110.5,'2012-08-17',3009,5003);
 insert into orders values(70007,948.5,'2012-09-10',3005,5002);
 insert into orders values(70005,2400.6,'2012-07-27',3007,5001);
 insert into orders values(70008,5760,'2012-09-10',3002,5001);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Creating a VIEW named 'totalforday'
+CREATE VIEW totalforday
+
+-- Selecting columns 'ord_date', count of distinct 'customer_id', average 'purch_amt', and total 'purch_amt' from the 'orders' table
+-- Grouping the result by the 'ord_date' column
+AS SELECT ord_date, COUNT(DISTINCT customer_id), AVG(purch_amt), SUM(purch_amt)
+FROM orders
+GROUP BY ord_date;
 
 
 
@@ -2151,6 +2171,9 @@ select dept.deptno, subquery1.total_amt from dept, ( select emp.deptno, Sum(emp.
  from emp group by deptno) subquery1 WHERE subquery1.deptno = dept.deptno
 
 
+
+
+
 Exercises On Subqueries:
 -------------------------
 1. Write a query to display the employee name and hiredate for all
@@ -2169,4 +2192,739 @@ employees whose department location is Dallas.
 5.Display the employee name and salary of all employees who report to King.
 
 
+
+
+Exists:
+------
+In the previous section, we used IN to link the inner query and the outer query in a subquerystatement. 
+
+IN is not the only way to do so -- one can use many operators such as >, <, or =.
+
+EXISTS is a special operator that we will discuss in this section.
+
+EXISTS simply tests whether the inner query returns any row. If it does, then the outer query proceeds. If not, the outer query does not execute, and the entire SQL statement returns nothing.
+
+The syntax for EXISTS is: 
+
+SELECT "column_name1"
+FROM "table_name1"
+WHERE EXISTS
+( SELECT *
+ FROM "table_name2"
+ WHERE [Condition] )
+
+Example:
+
+SELECT ename, deptno FROM emp WHERE EXISTS 
+(SELECT * FROM emp WHERE sal >3500 )
+
+
+
+
+
+
+
+INDEXES:
+========
+Index is a database object ,index is a pointer which
+locates the phsyical data of a table.
+
+we can create index explicity on columns,
+so that we can increase the performance of the sql statement query.
+
+
+TYPES OF INDEXES:
+======================================
+1)SIMPLE INDEX
+2)COMPLEX INDEX OR COMPOSITE INDEX
+
+
+SIMPLE INDEX:
+=============
+
+SIMPLE INDEX IS A INDEX WHICH IS CREATED BASED ON SINGLE COLUMN.
+
+SYNTAX:
+=======
+
+CREATE  INDEX INDEXNAME ON  TABLENAME(COLUMNANME)
+
+EX:
+===
+Before Index created:
+---------------------
+
+SELECT * FROM  employees WHERE hire_date > '2000-01-01';
+
+create  index:
+--------------
+CREATE INDEX i_hire_date ON employees(hire_date);
+
+
+After Index created:
+---------------------
+SELECT * FROM  employees WHERE hire_date > '2000-01-01';
+    
+
+NOTE:
+======
+WE NEED TO CREATE INDEX ON COLUMNS,THAT COLUMNS
+FREQUENTLY USED IN WHERE CLAUSE.
+
+WHEN CREATE INDEX THE TABLE WILL BE SCANNED BASED ON INDEX
+ RANGE SCAN.
+
+
+COMPLEX or composite index:
+---------------------------
+A COMPLEX INDEX IS CREATED BASED ON MORE THAN ONE COLUMN.
+
+SYNTAX:
+========
+CREATE INDEX INDEXNAME ON TABLENAME(COL1,COL2...,COL32);
+
+Ex:
+---
+Before Index created:
+---------------------
+SELECT  * FROM employees WHERE first_name = 'Georgi'AND last_name = 'Facello';
+
+create index:
+-------------
+
+CREATE INDEX i_composite ON employees(first_name, last_name);
+
+
+after index created:
+--------------------
+SELECT  * FROM employees WHERE first_name = 'Georgi'AND last_name = 'Facello';
+
+
+3)Unique index:
+----------------
+Syntax:
+--------
+create unique index indexname on tablename(columns);
+
+it will create the indexes on columns as well as it will create the unique constraints on 
+columns(duplicates not allowed).
+ex:
+---
+create unique index infy_fn_ln_uq on info_1(first_name,last_name);
+
+select * from info_1 where first_name='smith' and last_name='joe';
+
+explain select * from info_1 where first_name='smith' and last_name='joe';
+
+it will executes the select query based on index scan
+
+try to insert duplicates in info_1 table.
+
+insert into info_1 values(4,'smith','joe','sa',5000);
+insert into info_1 values(4,'smith','joe','sa',5000);//duplicates entery not allowed
+
+
+
+to list indexes on table from database
+=======================================
+show index from tablename from databasename;
+
+Ex:
+show index from emp from parul;
+
+
+to drop index:
+--------------
+DROP INDEX index_name ON table_name
+
+or
+
+alter table tablename drop index indexname;
+
+
+
+
+
+
+
+
+
+dense_rank():
+--------------
+This function assigns a rank to each row within a partition. 
+
+The ranks are assigned in a consecutive manner, if there two values are equal then they will be assigned the same rank, and the next rank value will be one greater than the previous rank assigned.
+
+DENSE_RANK() On Sal column:
+---------------------------
+SELECT empno, ename, sal, DENSE_RANK() OVER (ORDER BY sal) my_rank  FROM emp;
+
+Based on each department you need assign DENSE rank using PARTITION BY:
+----------------------------------------------------------------
+SELECT empno, ename, sal,deptno ,
+DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal) dens_rank  
+FROM emp;
+
+Rank:
+-----
+This function assigns a rank to each row within a partition that has gaps. 
+
+In this case, ranks are assigned in a non-consecutive manner i.e if there two records have the same value then they will be assigned the same rank, and the next rank value will be the previous rank plus the number of duplicates.
+
+Examples:
+---------
+SELECT empno, ename, sal, RANK() OVER (ORDER BY sal) my_rank  FROM emp;  
+
+Based on each department you need assign rank using PARTITION BY:
+----------------------------------------------------------------
+SELECT empno, ename, sal, deptno,RANK() OVER (PARTITION BY deptno ORDER BY sal) my_rank  FROM emp;  
+
+
+
+
+SET OPERATORS:
+==============
+UNION
+UNIONALL
+
+Rules for set operators:
+=======================
+1. Number of columns used in the query should match.
+2. column data type should match for the queries in set operators.
+
+UNION:
+======
+THIS OPERATEOR UNION RETRIVES THE OUTPUT OF TWO QUERIES 
+AND IT REMOVES DUPLICATE RECORDS.
+
+CREATE TABLE DEPT_U1 AS SELECT * FROM DEPT;
+CREATE TABLE DEPT_U2 AS SELECT * FROM DEPT;
+
+INSERT SOME RECORDS INTO ABOVE TWO TABLES.
+
+EX:
+====
+
+SELECT * FROM DEPT_U1
+UNION
+SELECT * FROM DEPT_U2;
+
+---IT WILL REMOVE DUPLICATES RECORDS.
+
+UNION ALL:
+==========
+
+SELECT * FROM DEPT_U1
+UNION ALL
+SELECT * FROM DEPT_U2;
+
+NOTE:
+=====
+IT WILL DISPLAY ALL THE DUPLICATE RECORDS FROM TWO TABLES
+
+
+STRING FUNCTIONS:
+==================
+This functions are used to perform  manipulation
+on character data.
+
+1)upper -- upper('string')-it will convert the lowercase into uppercase
+
+2)lower --lower('string') -it wil convert the given string into lowecase
+ 
+3)initcap--initcap('string') -it will display the given string as first letter in capital--in not mysql
+
+4)length --length('string')-it will retrun no of characters count.
+
+5)lpad: 
+========
+this function is used to add the character at the end of left 
+
+syntax:
+=======
+lpad('string',length,chars);
+
+ex:
+====
+write a query to add some characters to a given string;
+
+ex:
+====
+select  lpad('raju',11,'welcome') from  dual;
+
+6)rpad
+=======
+select  rpad('raju',11,'welcome') from  dual;
+
+
+7)ltrim
+=========
+This function will remove the character from left side of 
+a given string
+
+syntax:
+========
+
+ltrim(string,chars);
+
+ex:
+===
+
+write a query to remove the characters from left side a given string
+
+sol:
+====
+select ltrim('welcome','we') from dual;
+
+
+8)rtrim
+========
+this function will remove the characters from right side of a
+given string.
+
+syntax:-- rtrim('string',chars)
+ex:
+===
+
+select rtrim('welcome to raju','raju') from dual;
+
+
+9)trim
+--------
+
+this will remove the characters from left and right side end of a
+given.
+
+syntax:
+=======
+trim(unused from 'string');
+
+ex:
+===
+select trim( 'i' from 'indiani') from dual;
+
+10)substr
+---------
+this function will display a part of  string
+from a given strin.
+
+syntax:
+=======
+substr('string',startposition,no of character);
+
+ex:
+---
+select  substr('welcome',4,2) from dual;
+
+
+11)replace
+==========
+this function used to replace the characters
+
+syntax:
+=======
+replace('string','oldchars','newchars');
+
+ex:
+===
+select replace('chaitanya','ta','ka') from dual;
+
+1)write a query to display string in upper case  from dual;
+
+ex:
+====
+select upper('welcome to training') from dual;
+
+2)write a query to display given string in lowercase from dual;
+
+ex:
+===
+selet lower('WELCOME TO training')  from dual;
+
+
+EXERCISES:
+===========
+
+1) WRITE A QUERY TO DISPLAY ENAME COLUMN IN LOWER CASE FROM EMP;
+
+3)WRITE A QUERY TO REPLACE ENAME=SCOTT   WITH TIGER  FROM EMP;
+
+select replace(ename,'SCOTT','TIGER') from emp
+
+4)WRITE A QUERY TO DISPLAY SUBSTR  OF ALL ENAME  FIRST THREE
+   CHARACTES FROM EMP;
+
+select substr(ename,1,3) from emp;
+
+syntax:
+=======
+substr('string',startposition,no of character);
+
+
+
+
+
+
+
+
+NUMBER FUNCTIONS:
+=================
+
+ABS -- IT WILL DISPLAY ABSLOUTE VALUE INTEGER.
+
+SYNTAX:
+=======
+ABS(NUM)
+
+EX:
+===
+SELECT ABS(5),ABS(-5),ABS(NULL) FROM DUAL;
+
+OLP:--  5,5,
+
+SQRT:
+=====
+IT WILL RETRUN SQRT ROOT VALUE OF A NUMBER.
+
+SYNTAX:
+========
+
+SQRT(NUM);
+
+EX:
+===
+
+SELECT SQRT(4),SQRT(9),SQRT(5),SQRT(NULL),SQRT(256) FROM DUAL;
+
+OLP:-- 2,3,2.36,
+
+MOD:
+====
+THIS FUNCTION RETRUN REMAINDER.
+
+SYNTAX
+======
+
+MOD(VALUE,DIVISON);
+
+EX:
+===
+SELECT MOD(4,2),MOD(5,2) FROM dual;
+
+O/P:- 0,1
+
+
+CEIL:
+======
+THIS FUNCTION ROUND THE VALUE TO HIGHEST POSSIBLE VALUE
+
+SYNTAX:
+========
+
+CEIL(NUM);
+
+EX:
+===
+
+SELECT CEIL(4.5),CEIL(5),CEIL(4.2) FROM DUAL;
+
+OLP:- 5,5,5
+
+FLOOR:
+======
+THIS FUNCTION ROUND THE VALUE TO Lowest POSSIBLE VALUE
+
+SYNTAX:
+-------
+FLOOR(NUM);
+
+EX:
+===
+
+SELECT FLOOR(4.5),FLOOR(4.2),FLOOR(4.7) FROM DUAL;
+
+O/P:- 4,4,4,
+
+pow()
+round()
+rand() -to generate the random numbers;
+
+
+
+LOGINCAL OPERATORS:
+===================
+
+AND 
+OR
+
+IS NULL OPERATOR:
+=================
+THIS RETRUN THE VALUES BASED ON SEARCH OF NULL VALUES.
+
+
+
+
+Normalization:
+=============
+Normalization is process of removing redundancy and improving accurency of the database. 
+Normalization can be achieved by using normal forms.
+
+*1st Normal form (1NF):
+----------------------- 
+A database is in 1NF if it satisfies following rules.
+
+Rule1: Each cell should have one value.
+Rule2: Table should have primary key.
+
+2nd Second Normal form (2NF):
+==========================
+A database is in 2NF if it satisfies following rules.
+Rule1: Database should be in 1NF.
+Rule2: There should be no partial dependency.
+
+Partial dependency:
+==================
+When a non−key attribute is dependent on part of a primary key. Then these exists partial dependency.
+
+3rd Normal form (3NF): 
+====================
+A database is in 3NF if it satisfies the following rules. 
+Rule1: Database should be in 2nd NF.
+Rule2: These should be no transitive dependency.
+
+Transitive dependency: 
+=====================
+When a non key attribute is dependent on another non key attribute then these Exists transitive dependency .
+
+
+Exercise normalization
+----------------------------
+The following table is already in first normal form (1NF). There is only one entry per field. 
+
+Please convert this table to the third normal form (3NF) using the techniques you learned in this Unit.
+
+Check the other solutions and comment them, if necessary. 
+
+A table with the students and their grades in different topics.
+
+UnitID	StudentID	Date	TutorID	Topic	Room	Grade	Book		TutEmail
+U1	St1		23.02.03	Tut1	GMT	629	4.7	Deumlich	tut1@fhbb.ch
+U2	St1		18.11.02	Tut3	GIn	631	5.1	Zehnder		tut3@fhbb.ch
+U1	St4		23.02.03	Tut1	GMT	629	4.3	Deumlich	tut1@fhbb.ch
+U5	St2		05.05.03	Tut3	PhF	632	4.9	Dümmlers	tut3@fhbb.ch
+U4	St2		04.07.03	Tut5	AVQ	621	5.0	SwissTopo	tut5@fhbb.ch
+
+sol:
+----
+
+unitID   topic date room book tutorID
+
+tutorid  tutemail
+
+studentID  Grade unitId
+
+
+
+
+
+
+
+
+
+Common Table Expression (CTE) in MySQL:
+------------------------------------
+A Common Table Expression (CTE) is a temporary named result set that is defined within the scope of a single SQL query. 
+
+It allows you to write complex queries in a more readable and maintainable manner, by breaking them down into smaller, logical steps. 
+
+CTEs can be used in MySQL with the "WITH" keyword, followed by the name of the CTE and the SELECT statement that defines it. Once a CTE is defined, it can be referenced multiple times within the same query.
+
+One of the main benefits of using CTEs is that they allow you to create recursive queries, which are queries that reference themselves. 
+
+This can be useful for tasks such as generating hierarchical data or finding the shortest path between nodes in a graph. 
+
+CTEs can also be used to simplify the syntax of complex joins, to create derived tables that can be used within other queries, or to improve query performance by reducing the number of times that a subquery needs to be executed
+
+MySQL CTE Syntax
+------------------
+The basic syntax for creating a Common Table Expression (CTE) in MySQL is as follows:
+
+WITH cte_name AS (
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+)
+SELECT *
+FROM cte_name;
+
+
+
+
+ Syntax:multiple CTEs within the same query, by separating each CTE definition with a comma. For example:
+
+WITH cte1 AS (
+    SELECT column1, column2, ...
+    FROM table1
+    WHERE condition1
+),
+cte2 AS (
+    SELECT column3, column4, ...
+    FROM table2
+    WHERE condition2
+)
+SELECT *
+FROM cte1
+JOIN cte2 ON cte1.column1 = cte2.column3;
+
+In this example, two CTEs are defined: "cte1" and "cte2". The CTEs are then referenced in the main query by joining them on a common column and selecting all columns from both CTEs.
+
+MySQL CTE Examples
+------------------
+An example of how Common Table Expressions (CTEs) can be used in MySQL:
+
+Suppose you have a sales table with columns "product_name", "sales_date", and "revenue". 
+
+You want to calculate the total revenue for each product over the past 30 days, as well as the percentage change in revenue compared to the previous 30-day period. You can use a CTE to calculate these metrics:
+
+The following commands can be used to create the table:
+
+CREATE TABLE sales (
+    product_name VARCHAR(50),
+    sales_date DATE,
+    revenue DECIMAL(10, 2));
+
+The following commands can be used to insert data into the table:
+
+INSERT INTO sales (product_name, sales_date, revenue) VALUES 
+    ('Product A', '2023-03-01', 1000), 
+    ('Product A', '2023-03-15', 1500), 
+    ('Product A', '2023-03-30', 2000), 
+    ('Product B', '2023-03-01', 800), 
+    ('Product B', '2023-03-15', 1200), 
+    ('Product B', '2023-03-30', 1600),
+    ('Product C', '2023-03-01', 500),
+    ('Product C', '2023-03-15', 750),
+    ('Product C', '2023-03-30', 1000);
+
+);
+
+Query:
+-------
+WITH sales_last_30_days AS (
+    SELECT product_name, SUM(revenue) AS total_revenue
+    FROM sales
+    WHERE sales_date BETWEEN '2023-03-10' AND '2023-04-09'
+    GROUP BY product_name
+),
+sales_previous_30_days AS (
+    SELECT product_name, SUM(revenue) AS total_revenue
+    FROM sales
+    WHERE sales_date BETWEEN '2023-02-08' AND '2023-03-09'
+    GROUP BY product_name
+)
+SELECT
+    s.product_name,
+    s.total_revenue,
+    (s.total_revenue - p.total_revenue) / p.total_revenue * 100 AS revenue_change
+FROM sales_last_30_days s
+JOIN sales_previous_30_days p ON s.product_name = p.product_name;
+
+
+Explanation:
+------------
+This CTE first calculates the total revenue for each product over the past 30 days and stores the result in a CTE called "sales_last_30_days". 
+
+It then calculates the total revenue for each product over the previous 30-day period and stores the result in a CTE called "sales_previous_30_days". 
+
+The main query joins these two CTEs on the "product_name" column and calculates the percentage change in revenue.
+
+More Advanced MySQL CTE Example
+-----------------------------
+An example of more advanced Common Table Expressions (Recursive CTEs) in MySQL:
+
+Suppose you have a database with a table called "sales" that contains sales data for a company. The "sales" table has columns for "order_date", "product", "quantity", and "revenue".
+
+You want to create a report that shows the total revenue generated by each product, broken down by month. However, you also want to include a column that shows the percentage of total revenue generated by each product, based on the revenue generated by all products.
+
+The following commands can be used to create the table:
+
+CREATE TABLE sales (
+  order_date DATE,
+  product VARCHAR(50),
+  quantity INT,
+  revenue DECIMAL(10,2)
+);
+
+
+INSERT INTO sales (order_date, product, quantity, revenue) VALUES 
+('2023-01-01', 'Product A', 10, 1000.00),
+('2023-01-15', 'Product B', 5, 500.00),
+('2023-02-01', 'Product A', 8, 800.00),
+('2023-02-15', 'Product C', 3, 300.00),
+('2023-03-01', 'Product A', 12, 1200.00),
+('2023-03-15', 'Product B', 7, 700.00);
+
+
+Query:
+------
+WITH monthly_sales AS (
+  SELECT
+    DATE_FORMAT(order_date, '%Y-%m') AS month,
+    product,
+    SUM(revenue) AS revenue
+  FROM
+    sales
+  GROUP BY
+    month,
+    product
+),
+total_sales AS (
+  SELECT
+    month,
+    SUM(revenue) AS total_revenue
+  FROM
+    monthly_sales
+  GROUP BY
+    month
+)
+SELECT
+  monthly_sales.month,
+  monthly_sales.product,
+  monthly_sales.revenue,
+  (monthly_sales.revenue / total_sales.total_revenue)*100 AS percentage
+FROM
+  monthly_sales
+  JOIN total_sales ON monthly_sales.month = total_sales.month
+ORDER BY
+  monthly_sales.month,
+  percentage DESC;
+
+
+Benefits of Using CTE
+-------------------
+Here are some of the benefits of using Common Table Expressions (CTEs) in MySQL:
+
+Simplify complex queries:
+-----------------------
+CTEs can be used to break down complex queries into smaller, more manageable parts. By defining CTEs, you can avoid writing complex subqueries multiple times, which can make your code easier to read and understand.
+
+Improve query performance:
+-------------------------
+CTEs can help improve query performance by reducing the number of database scans required to execute a query. By defining a CTE, you can create a temporary table that can be used to store intermediate results, which can reduce the number of scans required to retrieve data.
+
+Reuse code:
+----------
+CTEs can be used to create modular SQL code that can be reused across multiple queries. By defining a CTE at the beginning of a query, you can create a self-contained module that can be used in other queries, making your code more flexible and adaptable.
+
+Traverse hierarchical data:
+-------------------------
+CTEs can be used to traverse hierarchical data structures, such as organizational charts or product categories. By defining a recursive CTE, you can traverse the hierarchy and perform complex calculations on the data.
+
+Simplify debugging:
+------------------
+CTEs can help simplify debugging by breaking a complex query into smaller parts. By defining CTEs, you can analyze each part of the query individually, making it easier to identify and fix errors.
+
+Improve code readability:
+------------------------
+CTEs can improve the readability of your SQL code by providing a clear and concise way to define temporary named result sets. By using descriptive names for your CTEs, you can make your code easier to read and understand.
 
