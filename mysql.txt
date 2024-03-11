@@ -4569,6 +4569,7 @@ show triggers from parul where `table`='emp_base';
 
 
 Drive Link To Upload The Assignments and Project (convert to zip)
+Last4DIGITENROLLNO_YOURNAME
 ====================================
 https://forms.gle/Uh5A9rRmYT6TmUNw8
 
